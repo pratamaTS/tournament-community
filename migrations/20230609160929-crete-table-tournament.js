@@ -3,7 +3,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('table_games', {
+    await queryInterface.createTable('table_tournament', {
       id: {
           type: Sequelize.INTEGER,
           allowNull: false,
@@ -28,26 +28,26 @@ module.exports = {
           allowNull: false
       },
       created_at: {
-          type: Sequelize.DATE,
+          type: 'TIMESTAMP',
           allowNull: false,
-          defaultValue: Sequelize.literal('CURRENT_TIMESTAMP(3)'),
+          defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
       },
       updated_at: {
-          type: Sequelize.DATE,
-          allowNull: false,
-          defaultValue: Sequelize.literal('CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3)'),
+          type: 'TIMESTAMP',
+          allowNull: true,
+          defaultValue: Sequelize.literal('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
       }
     });
 
     await queryInterface.sequelize.query(
-      "ALTER TABLE table_team ADD CONSTRAINT fk_games_id FOREIGN KEY (id_games) REFERENCES table_games(id)"
+      "ALTER TABLE table_tournament ADD CONSTRAINT fk_games_t_id FOREIGN KEY (id_games) REFERENCES table_games(id)"
     );
   },
 
   async down (queryInterface, Sequelize) {
     await queryInterface.sequelize.query(
-      "ALTER TABLE table_team DROP CONSTRAINT fk_games_id"
+      "ALTER TABLE table_tournament DROP CONSTRAINT fk_games_t_id"
     );
-    return queryInterface.dropTable('table_team');
+    return queryInterface.dropTable('table_tournament');
   }
 };

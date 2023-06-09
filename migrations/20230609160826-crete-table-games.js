@@ -20,14 +20,14 @@ module.exports = {
           defaultValue: 'inactive'
       },
       created_at: {
-          type: Sequelize.DATE,
+          type: 'TIMESTAMP',
           allowNull: false,
-          defaultValue: Sequelize.literal('CURRENT_TIMESTAMP(3)'),
+          defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
       },
       updated_at: {
-          type: Sequelize.DATE,
-          allowNull: false,
-          defaultValue: Sequelize.literal('CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3)'),
+          type: 'TIMESTAMP',
+          allowNull: true,
+          defaultValue: Sequelize.literal('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
       }
     });
   },
