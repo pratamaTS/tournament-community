@@ -21,6 +21,7 @@ func initRoutes() {
 	})
 
 	router.GET("/recomended_tournament/:userid", handler.FetchRecommendationTournamentHandler)
+	router.POST("/join_tournament", handler.SaveTeamToTournamentHandler)
 
 	log.Print("Starting service")
 	router.Run(":" + os.Getenv("PORT"))
