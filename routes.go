@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
+	"github.com/tournament-community/service/handler"
 )
 
 func initRoutes() {
@@ -18,6 +19,8 @@ func initRoutes() {
 		}
 		c.IndentedJSON(http.StatusOK, resp)
 	})
+
+	router.GET("/recomended_tournament/:userid", handler.FetchRecommendationTournamentHandler)
 
 	log.Print("Starting service")
 	router.Run(":" + os.Getenv("PORT"))
